@@ -1,0 +1,1 @@
+ /home/hyper/flutter/spenmax/.dart_tool/flutter_build/6e2d5389d2731b56b1bf2ff2e144485c/native_assets.yaml: 
