@@ -131,9 +131,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: Get.height / 7,
-                      ), // Sign Up
+                      const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class LottieLoader extends StatelessWidget {
   const LottieLoader({super.key});
@@ -8,16 +7,40 @@ class LottieLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: 200,
-        height: 200,
+        width: 120,
+        height: 120,
         decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.lightBlue.withOpacity(0.3),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: const Offset(0, 5),
+            ),
+          ],
         ),
-        padding: const EdgeInsets.all(20),
-        child: Lottie.asset(
-          'assets/images/loader/loader.json', // Path to your Lottie file
-          fit: BoxFit.contain,
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(
+                strokeWidth: 4,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Loading...",
+                style: TextStyle(
+                  color: Colors.lightBlue,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

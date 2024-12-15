@@ -1,54 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glassmorphism/glassmorphism.dart';
 
 class SpenmaxCard extends StatelessWidget {
-  const SpenmaxCard({super.key});
-
+  const SpenmaxCard(
+      {super.key,
+      required this.package,
+      required this.expiry,
+      required this.customerid,
+      required this.name});
+  final String package;
+  final String expiry;
+  final String customerid;
+  final String name;
   @override
   Widget build(BuildContext context) {
-    return GlassmorphicContainer(
+    return Container(
       width: Get.width,
       height: 250,
-      borderRadius: 10,
-      blur: 20,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromARGB(255, 8, 82, 78).withOpacity(0.6),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: const Offset(0, 5),
+            ),
+          ],
+          color: const Color(0xff657575),
+          borderRadius: BorderRadius.circular(10)),
       alignment: Alignment.center,
-      border: 1,
-      linearGradient: const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Color.fromARGB(255, 77, 85, 85),
-          Color.fromARGB(255, 125, 129, 129),
-        ],
-        stops: [0.1, 1],
-      ),
-      borderGradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          const Color.fromARGB(255, 62, 156, 141).withOpacity(0.5),
-          Colors.black.withOpacity(0.1),
-        ],
-      ),
       child: Stack(
         children: [
           Positioned(
-            top: 15,
+            top: 17,
             left: 0,
             child: Image.asset(
-              'assets/images/Vector.png', // Replace with your logo path
+              'assets/images/Vector.png',
               width: 100,
               height: 40,
             ),
           ),
           // Title
-          const Positioned(
+          Positioned(
             top: 20,
             left: 85,
             child: Text(
-              "Spenmax Lifestyle + Services",
-              style: TextStyle(
+              package,
+              style: const TextStyle(
                 fontSize: 18,
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.normal,
@@ -58,76 +56,70 @@ class SpenmaxCard extends StatelessWidget {
           ),
 
           // Card details
-          const Positioned(
-            top: 80,
-            left: 20,
+          Positioned(
+            top: 70,
+            left: 30,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 10),
                 Text(
-                  "Customer Id",
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "* * * *  * * * *  * * * *  3 4 5 6",
-                  style: TextStyle(
+                  customerid,
+                  style: const TextStyle(
+                    wordSpacing: 12,
                     fontFamily: "Poppins",
                     color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 65),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Expiry Date",
+                        const Text(
+                          "Card Holder Name",
                           style: TextStyle(
+                            fontFamily: "Poppins",
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          name,
+                          style: const TextStyle(
                             fontFamily: "Poppins",
                             color: Colors.white,
                             fontSize: 14,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "12/25",
-                          style: TextStyle(
-                            fontFamily: "Poppins",
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            // fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(width: 50),
+                    const SizedBox(width: 40),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Name",
+                        const Text(
+                          "Expiry Date",
                           style: TextStyle(
+                            fontFamily: "Poppins",
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          expiry,
+                          style: const TextStyle(
+                            // fontWeight: FontWeight.bold,
                             fontFamily: "Poppins",
                             color: Colors.white,
                             fontSize: 14,
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "John Doe",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Poppins",
-                            color: Colors.white,
-                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -144,7 +136,7 @@ class SpenmaxCard extends StatelessWidget {
             right: 15,
             child: Image.asset(
               'assets/images/logob.png', // Replace with your logo path
-              width: 100,
+              width: 90,
               height: 40,
             ),
           ),
