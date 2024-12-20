@@ -18,12 +18,12 @@ class SpenmaxCard extends StatelessWidget {
       width: Get.width,
       height: 250,
       decoration: BoxDecoration(
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-              color: const Color.fromARGB(255, 8, 82, 78).withOpacity(0.6),
+              color: Color(0xff647475),
               blurRadius: 10,
               spreadRadius: 2,
-              offset: const Offset(0, 5),
+              offset: Offset(0, 5),
             ),
           ],
           color: const Color(0xff657575),

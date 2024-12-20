@@ -280,6 +280,10 @@
         "source": "com.example.spenmax.app-core-1.13.1-17:/drawable/notification_bg.xml"
     },
     {
+        "merged": "com.example.spenmax.app-merged_res-28:/xml_flutter_image_picker_file_paths.xml.flat",
+        "source": "com.example.spenmax.app-packaged_res-30:/xml/flutter_image_picker_file_paths.xml"
+    },
+    {
         "merged": "com.example.spenmax.app-merged_res-28:/drawable-hdpi-v4_ic_call_decline_low.png.flat",
         "source": "com.example.spenmax.app-core-1.13.1-17:/drawable-hdpi-v4/ic_call_decline_low.png"
     },

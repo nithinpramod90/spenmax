@@ -40,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
     return Obx(
       () => Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 140, 197, 199),
+          color: const Color(0xffC1DCDC),
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
@@ -53,13 +53,13 @@ class BottomNavBar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
               rippleColor: Colors.grey[300]!,
-              hoverColor: const Color.fromARGB(255, 140, 197, 199),
+              hoverColor: const Color(0xffC1DCDC),
               gap: 8,
               activeColor: Colors.black,
               iconSize: 18,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color.fromARGB(255, 140, 197, 199),
+              tabBackgroundColor: const Color(0xffC1DCDC),
               color: Colors.black,
               tabs: const [
                 GButton(icon: Icons.home, text: 'Home'),

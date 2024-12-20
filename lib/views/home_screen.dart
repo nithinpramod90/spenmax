@@ -35,21 +35,33 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                WelcomeText(name: user['name'] ?? 'User'),
+                WelcomeText(),
                 const SizedBox(height: 28),
                 SpenmaxCard(
-                  package: user['package_c']?[0]['package_name'] ?? '',
+                  package: (user['package_c'] != null &&
+                          user['package_c'].isNotEmpty)
+                      ? user['package_c'][0]['package_name']
+                      : 'Package Expired',
                   name: user['name'] ?? '',
                   customerid: formatCustomerId(user['customer_id']),
-                  expiry: user['package_c']?[0]['expiry_date'] ?? '',
+                  expiry: (user['package_c'] != null &&
+                          user['package_c'].isNotEmpty)
+                      ? user['package_c'][0]['expiry_date']
+                      : 'Expired',
                 ),
                 const SizedBox(height: 28),
                 HomeContainer(
                   imageurl: user['image'] ?? 'null',
                   customerid: user['customer_id'] ?? '',
                   name: user['name'] ?? '',
-                  purchasedate: user['package_c']?[0]['purchase_date'] ?? '',
-                  expirydate: user['package_c']?[0]['expiry_date'] ?? '',
+                  expirydate: (user['package_c'] != null &&
+                          user['package_c'].isNotEmpty)
+                      ? user['package_c'][0]['expiry_date']
+                      : 'Expired',
+                  purchasedate: (user['package_c'] != null &&
+                          user['package_c'].isNotEmpty)
+                      ? user['package_c'][0]['purchase_date']
+                      : 'Expired',
                   phone: user['number'] ?? '',
                   state: user['state'] ?? '',
                   district: user['district'] ?? '',
@@ -58,7 +70,10 @@ class HomeScreen extends StatelessWidget {
                   dob: user['dob'] ?? '',
                   email: user['email_id'] ?? '',
                   pin: user['pincode'] ?? '',
-                  package: user['package_c']?[0]['package_name'] ?? '',
+                  package: (user['package_c'] != null &&
+                          user['package_c'].isNotEmpty)
+                      ? user['package_c'][0]['package_name']
+                      : 'Expired',
                   ishome: true,
                 ),
               ],

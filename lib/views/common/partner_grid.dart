@@ -114,13 +114,18 @@ class PartnerGrid extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              branch['company_name'],
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
+                            Expanded(
+                              child: Text(
+                                branch['company_name'],
+                                maxLines: 1,
+                                overflow: TextOverflow
+                                    .ellipsis, // This ensures truncation with ellipsis
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                             const Spacer(),
@@ -136,29 +141,36 @@ class PartnerGrid extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 12),
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              const TextSpan(
-                                text: 'Locality        ',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black,
-                                ),
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            return RichText(
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: 'Locality        ',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: branch['Locality'],
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              TextSpan(
-                                text: branch['Locality'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
+                              overflow: TextOverflow
+                                  .ellipsis, // Ensures text truncates with ellipsis
+                              maxLines: 1, // Limits text to one line
+                            );
+                          },
                         ),
                         const SizedBox(height: 12),
                         RichText(
@@ -228,7 +240,8 @@ class PartnerGrid extends StatelessWidget {
                                 minimumSize: Get.size / 25,
                                 foregroundColor: Colors.black,
                                 backgroundColor: Colors.white, // Text color
-                                side: const BorderSide(color: Colors.black), // Border
+                                side: const BorderSide(
+                                    color: Colors.black), // Border
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       25.0), // Adjust border radius as needed

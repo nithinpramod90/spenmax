@@ -16,15 +16,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  color: Color.fromARGB(255, 140, 197, 199),
-                  blurRadius: 10,
-                  spreadRadius: 2,
-                  offset: Offset(0, 5),
-                ),
-              ],
-              color: const Color.fromARGB(255, 140, 197, 199),
+              // boxShadow: const [
+              //   BoxShadow(
+              //     color: Color.fromARGB(255, 140, 197, 199),
+              //     blurRadius: 10,
+              //     spreadRadius: 2,
+              //     offset: Offset(0, 5),
+              //   ),
+              // ],
+              color: const Color(0xffC1DCDC),
               borderRadius: BorderRadius.circular(10)),
           child: AppBar(
             scrolledUnderElevation: 0,
@@ -33,7 +33,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             title: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                  height: 30, child: Image.asset('assets/images/logob.png')),
+                height: 30,
+                child: Image.asset('assets/images/logob.png'),
+              ),
             ),
             actions: [
               Padding(
@@ -74,7 +76,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               )
             ],
-            backgroundColor: const Color.fromARGB(255, 140, 197, 199),
+            backgroundColor: const Color(0xffC1DCDC),
             elevation: 0,
           ),
         ),

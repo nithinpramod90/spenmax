@@ -6,8 +6,10 @@ class Test extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: LottieLoader(),
+    return const SizedBox(
+      height: 250,
+      width: 250,
+      child: LottieLoader(),
     );
   }
 }

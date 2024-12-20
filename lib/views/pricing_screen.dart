@@ -20,7 +20,7 @@ class PricingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const WelcomeText(name: 'Nikhil Rakesh'),
+            WelcomeText(),
 
             // Package Type Buttons
             Padding(
@@ -40,11 +40,11 @@ class PricingScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "The packages\nfor your needs",
+                        "The packages\nfor your \nneeds",
                         style: TextStyle(
                           color: Color.fromARGB(255, 35, 150, 156),
                           fontFamily: "Poppins",
-                          fontSize: 52,
+                          fontSize: 42,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -57,7 +57,7 @@ class PricingScreen extends StatelessWidget {
                             color: const Color(0xFFA0C9CB),
                           ),
                         ),
-                        height: Get.height / 12,
+                        height: Get.height / 13,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -95,7 +95,7 @@ class PricingScreen extends StatelessWidget {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1, // Adjust number of columns as needed
-                      childAspectRatio: 0.92,
+                      childAspectRatio: 0.87,
                     ),
                     itemCount: controller.packages.length,
                     itemBuilder: (context, index) {

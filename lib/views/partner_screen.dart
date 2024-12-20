@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:spenmax/model/api/api.dart';
 import 'package:spenmax/model/components/appbar.dart';
 import 'package:spenmax/model/components/bottom_nav_bar.dart';
 import 'package:spenmax/model/components/welcome_text.dart';
-import 'package:spenmax/views/common/partner_widge.dart';
+import 'package:spenmax/views/common/partner_widget.dart';
 
 class PartnerSceen extends StatelessWidget {
   const PartnerSceen({super.key});
@@ -18,17 +17,17 @@ class PartnerSceen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const WelcomeText(name: "Nikhil Rakesh"),
+            WelcomeText(),
             const SizedBox(
               height: 10,
             ),
             PartnerWidge(),
-            ElevatedButton(
-                onPressed: () {
-                  final Api api = Api();
-                  print(api.fetchpartnercat());
-                },
-                child: const Text("data"))
+            //   ElevatedButton(
+            //       onPressed: () {
+            //         final Api api = Api();
+            //         print(api.fetchpartnercat());
+            //       },
+            //       child: const Text("data"))
           ],
         ),
       ),

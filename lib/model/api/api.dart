@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,16 @@ class Api {
 
   Future<void> deleteSessionId() async {
     await box.remove('token');
-    print('Session ID deleted');
+    print('bnbbn ID deleted');
+  }
+
+  Future<String?> getname() async {
+    return box.read('name');
+  }
+
+  Future<void> deletename() async {
+    await box.remove('name');
+    print('name ID deleted');
   }
 
   Future<void> authenticate(String email, String password) async {
@@ -41,8 +51,10 @@ class Api {
       if (response.statusCode == 200) {
         if (responseData['type'] == 'user') {
           final String token = responseData["token"];
-
+          final String name = responseData['name'];
           await box.write('token', token);
+          await box.write('name', name);
+
           print(response.body);
 
           Get.off(() => const HomeScreen());
@@ -65,9 +77,7 @@ class Api {
           position: SnackPosition.TOP,
           backgroundColor: Colors.black, // Background color
         );
-        if (response.statusCode == 403) {
-          Get.off(() => const SubscriptionScreen());
-        }
+
         print('Status Code: ${response.statusCode}');
       }
     } catch (e) {
@@ -84,10 +94,6 @@ class Api {
   Future<Map<String, dynamic>> fetchHomeDetails() async {
     final String? token = await getSessionId();
 
-    // if (token == null || token.isEmpty) {
-    //   throw Exception('Session ID is invalid or expired.');
-    // }
-
     try {
       final response = await http.get(
         Uri.parse('${AppConfig.baseUrl}/shop/customer/detail_update/user/'),
@@ -97,6 +103,7 @@ class Api {
         },
       );
       // print('Response: ${response.body}');
+      final responseData = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
         print('Response: ${response.body}');
@@ -110,6 +117,57 @@ class Api {
       }
     } catch (e) {
       print('Error fetching home details: $e');
+      throw Exception('Error: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>> updateCustomerDetails({
+    required String name,
+    required String phone,
+    required String district,
+    required String state,
+    required String address,
+    required String dob,
+    required String email,
+    required String pincode,
+    required String country,
+  }) async {
+    final String? token = await getSessionId();
+
+    try {
+      final response = await http.put(
+        Uri.parse('${AppConfig.baseUrl}/shop/customer/detail_update/user/'),
+        headers: {
+          'Authorization': 'Token $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'name': name,
+          'phone': phone,
+          'district': district,
+          'state': state,
+          'address': address,
+          'dob': dob,
+          'email': email,
+          'pincode': pincode,
+          'country': country,
+        }),
+      );
+
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        print('Update successssful: ${response.body}');
+        return responseData;
+      } else {
+        if (response.statusCode == 403) {
+          Get.off(() => const SubscriptionScreen());
+        }
+        throw Exception(
+            'Failed to update customer details. Status Code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error updating customer details: $e');
       throw Exception('Error: $e');
     }
   }
@@ -242,6 +300,167 @@ class Api {
       }
     } catch (e) {
       throw Exception('Error: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchPartnerDetails(String id) async {
+    final String? token = await getSessionId();
+
+    try {
+      final response = await http.get(
+        Uri.parse('${AppConfig.baseUrl}/shop/vendor/branches/customer/$id/'),
+        headers: {
+          'Authorization': 'Token $token',
+          'Content-Type': 'application/json',
+        },
+      );
+      // print('Response: ${response.body}');
+
+      if (response.statusCode == 200) {
+        print('Response: ${response.body}');
+        return jsonDecode(response.body);
+      } else {
+        throw Exception(
+            'Failed to load customer details. Status Code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching home details: $e');
+      throw Exception('Error: $e');
+    }
+  }
+
+  Future<void> forgetpassword(String email) async {
+    final url = Uri.parse('${AppConfig.baseUrl}/user/forgot/');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'email_id': email,
+        }),
+      );
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+      } else {
+        print(response);
+
+        showCustomSnackbar(
+          message: "User Credential incorrect!",
+
+          title: 'Error',
+          position: SnackPosition.TOP,
+          backgroundColor: Colors.black, // Background color
+        );
+        if (response.statusCode == 403) {
+          Get.off(() => const SubscriptionScreen());
+        }
+        print('Status Code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+      showCustomSnackbar(
+        message: "An unexpected error occurred.",
+        title: 'Error',
+        position: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  Future<void> usersignup(
+    String name,
+    String email,
+    String phone,
+    String dob,
+    String address,
+    String pincode,
+    String password,
+    String country,
+    String state,
+    String district,
+  ) async {
+    final url = Uri.parse('${AppConfig.baseUrl}/user/register/');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'image': null,
+          'name': name,
+          'number': phone,
+          'pincode': pincode,
+          'username': email,
+          'dob': dob,
+          'district': district,
+          'state': state,
+          'country': country,
+          'address': address,
+          'password': password
+        }),
+      );
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 201) {
+        await authenticate(email, password);
+      } else {
+        print(response);
+        print(responseData);
+        print(response.body);
+
+        showCustomSnackbar(
+          message: "User Credential incorrect!",
+
+          title: 'Error',
+          position: SnackPosition.TOP,
+          backgroundColor: Colors.black, // Background color
+        );
+        if (response.statusCode == 403) {
+          Get.off(() => const SubscriptionScreen());
+        }
+        print('Status Code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+      showCustomSnackbar(
+        message: "An unexpected error occurred.",
+        title: 'Error',
+        position: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  Future<bool> uploadImage(String uid, File image) async {
+    final String? token = await getSessionId();
+    print('${AppConfig.baseUrl}/shop/customer/photo/$uid/update/user/');
+    final url =
+        Uri.parse('${AppConfig.baseUrl}/shop/customer/photo/$uid/update/user/');
+    final request = http.MultipartRequest('PUT', url)
+      ..headers['Authorization'] = 'Token $token'
+      ..files.add(
+        await http.MultipartFile.fromPath('image', image.path),
+      );
+
+    try {
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        print('Image uploaded successfully!');
+        return true;
+      } else {
+        print('Failed to upload image. Status code: ${response}');
+        return false;
+      }
+    } catch (e) {
+      print('Error uploading image: $e');
+      return false;
     }
   }
 }

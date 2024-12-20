@@ -12,15 +12,21 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  // Fetch user details from API
   void fetchUserDetails() async {
     try {
       isLoading(true);
       final response = await api.fetchHomeDetails();
       userDetails.value = response;
     } catch (e) {
-      // Get.snackbar('Error', e.toString());
+      Get.snackbar('Error', e.toString());
     } finally {
       isLoading(false);
     }
+  }
+
+  // Reload data
+  void reloadData() {
+    fetchUserDetails();
   }
 }

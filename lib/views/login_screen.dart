@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spenmax/model/api/api.dart';
+import 'package:spenmax/views/forget_password.dart';
+import 'package:spenmax/views/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -84,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
                           onTap: () {
-                            // Handle forgot password
+                            Get.to(() => ForgetPassword());
                           },
                           child: const Row(
                             mainAxisSize: MainAxisSize.min,
@@ -92,19 +94,22 @@ class LoginScreen extends StatelessWidget {
                               Text(
                                 'Forgot your password?',
                                 style: TextStyle(
+                                  fontSize: 18,
                                   color: Colors.black54,
                                 ),
                               ),
                               Icon(
                                 Icons.arrow_right_alt,
                                 color: Colors.red,
+                                size: 18,
                               ),
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
-                      // Login Button
+                      const SizedBox(
+                        height: 30,
+                      ),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -135,17 +140,20 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Doesn't have an account yet?"),
+                          const Text(
+                            "Doesn't have an account yet?",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
                           GestureDetector(
                             onTap: () {
-                              // Handle sign-up navigation
+                              Get.to(() => const SignupScreen());
                             },
                             child: const Text(
                               ' Sign Up',
                               style: TextStyle(
-                                color: Color(0xFF539B9B),
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  color: Color(0xFF539B9B),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
                             ),
                           ),
                         ],

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:spenmax/model/components/active_badge.dart';
 import 'package:spenmax/model/components/bottom_nav_bar.dart';
+import 'package:spenmax/views/common/edit.dart';
 
 class HomeContainer extends StatelessWidget {
   HomeContainer(
@@ -45,7 +46,7 @@ class HomeContainer extends StatelessWidget {
       child: Container(
         // height: Get.height,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 119, 193, 196),
+          color: const Color(0xffC1DCDC),
           borderRadius:
               BorderRadius.circular(20), // Adjust the value for rounded corners
           // border: Border.all(
@@ -70,7 +71,7 @@ class HomeContainer extends StatelessWidget {
                   width: Get.width / 1.2,
                   height: Get.height / 1.5,
                   decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 64, 157, 161),
+                      color: const Color(0xff82AEB0),
                       borderRadius: BorderRadius.circular(10)),
                   alignment: Alignment.center,
                   child: Padding(
