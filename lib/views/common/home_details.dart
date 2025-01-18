@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:spenmax/model/components/active_badge.dart';
 import 'package:spenmax/model/components/bottom_nav_bar.dart';
-import 'package:spenmax/views/common/edit.dart';
 
 class HomeContainer extends StatelessWidget {
   HomeContainer(
@@ -110,17 +109,29 @@ class HomeContainer extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               // Image
-                              imageurl == 'null'
-                                  ? Image.asset(
-                                      "assets/images/man.png",
-                                      width: 100,
-                                      height: 100,
-                                    )
-                                  : Image.network(
-                                      imageurl, // Replace with your logo path
-                                      width: 100,
-                                      height: 100,
-                                    ),
+                              CircleAvatar(
+                                radius:
+                                    50, // Adjusted to maintain the 100x100 size
+                                backgroundColor: Colors.grey
+                                    .shade200, // CircleAvatar background color
+                                child: ClipOval(
+                                  child: imageurl == 'null'
+                                      ? Image.asset(
+                                          "assets/images/man.png",
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit
+                                              .cover, // Ensures the image is cropped and fills the circle
+                                        )
+                                      : Image.network(
+                                          imageurl,
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit
+                                              .cover, // Ensures the image is cropped and fills the circle
+                                        ),
+                                ),
+                              ),
 
                               const SizedBox(
                                 height: 16,

@@ -55,21 +55,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       right: 8,
                       top: 8,
                       child: Obx(() {
-                        return Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Text(
-                            '${notificationController.notificationCount.value}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
+                        if (notificationController.notificationCount.value >
+                            0) {
+                          return Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
                             ),
-                          ),
-                        );
+                            child: Text(
+                              '${notificationController.notificationCount.value}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox
+                              .shrink(); // Return an empty widget if count is 0
+                        }
                       }),
                     ),
                   ],

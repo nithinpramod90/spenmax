@@ -1,4 +1,4 @@
-#Fri Dec 20 02:03:41 IST 2024
+#Thu Jan 09 13:06:16 IST 2025
 base.0=/home/hyper/flutter/spenmax/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

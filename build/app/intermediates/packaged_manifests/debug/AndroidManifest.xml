@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.spenmax"
-    android:versionCode="1"
-    android:versionName="1.0.0" >
+    package="com.appmine.spenmax"
+    android:versionCode="3"
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -32,10 +32,10 @@
     </queries>
 
     <permission
-        android:name="com.example.spenmax.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.appmine.spenmax.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.spenmax.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.appmine.spenmax.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:name="android.app.Application"
@@ -80,7 +80,7 @@
 
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.example.spenmax.flutter.image_provider"
+            android:authorities="com.appmine.spenmax.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -114,7 +114,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.spenmax.androidx-startup"
+            android:authorities="com.appmine.spenmax.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.lifecycle.ProcessLifecycleInitializer"

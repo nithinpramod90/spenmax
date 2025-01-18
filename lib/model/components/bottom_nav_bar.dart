@@ -28,6 +28,10 @@ class BottomNavBarController extends GetxController {
   void navigateToScreen(int index) {
     changeTabIndex(index); // Update index and navigate
   }
+
+  void resetTabIndex() {
+    selectedIndex.value = 0; // Reset to the first tab
+  }
 }
 
 class BottomNavBar extends StatelessWidget {
@@ -56,10 +60,10 @@ class BottomNavBar extends StatelessWidget {
               hoverColor: const Color(0xffC1DCDC),
               gap: 8,
               activeColor: Colors.black,
-              iconSize: 18,
+              iconSize: 24,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xffC1DCDC),
+              tabBackgroundColor: const Color.fromARGB(255, 98, 194, 179),
               color: Colors.black,
               tabs: const [
                 GButton(icon: Icons.home, text: 'Home'),

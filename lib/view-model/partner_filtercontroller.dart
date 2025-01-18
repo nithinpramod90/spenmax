@@ -19,10 +19,7 @@ class CategoriesController extends GetxController {
     try {
       final List<Map<String, dynamic>> data = await api.fetchpartnercat();
       // Filter where is_active is true
-      activeCategories.value = data
-          .where(
-              (item) => item['is_active'] == true || item['is_active'] == false)
-          .toList();
+      activeCategories.value = data;
     } catch (e) {
       throw Exception('Error fetching categories: $e');
     }

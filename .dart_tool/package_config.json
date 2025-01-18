@@ -122,6 +122,12 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "flutter_screenutil",
+      "rootUri": "file:///home/hyper/.pub-cache/hosted/pub.dev/flutter_screenutil-5.9.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///home/hyper/snap/flutter/common/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -452,6 +458,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "whatsapp_unilink",
+      "rootUri": "file:///home/hyper/.pub-cache/hosted/pub.dev/whatsapp_unilink-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "xdg_directories",
       "rootUri": "file:///home/hyper/.pub-cache/hosted/pub.dev/xdg_directories-1.1.0",
       "packageUri": "lib/",
@@ -464,7 +476,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-19T19:31:24.346923Z",
+  "generated": "2025-01-09T06:48:45.672756Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///home/hyper/snap/flutter/common/flutter",

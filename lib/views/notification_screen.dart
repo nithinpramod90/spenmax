@@ -30,7 +30,7 @@ class NotificationScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WelcomeText(),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(12.0),
                 child: NoNotification(),
               ),

@@ -21,7 +21,7 @@ class BranchesController extends GetxController {
       );
       branches.assignAll(fetchedBranches);
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      // Get.snackbar('Error', e.toString());
     } finally {
       isLoading(false);
     }

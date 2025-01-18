@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
 import 'package:spenmax/model/api/api.dart';
+import 'package:spenmax/model/components/loader.dart';
 
 import 'package:spenmax/views/login_screen.dart';
 
@@ -37,6 +38,29 @@ class _SignupScreenState extends State<SignupScreen> {
   String country = "";
   String state = "";
   String city = "";
+  bool isButtonDisabled = false;
+
+  void handleSignUp() {
+    if (!isButtonDisabled) {
+      setState(() {
+        isButtonDisabled = true; // Disable the button
+      });
+      // Perform your sign-up logic here
+      api.usersignup(
+        nameController.text,
+        emailController.text,
+        phoneController.text,
+        dobController.text,
+        addressController.text,
+        pincodeController.text,
+        passwordController.text,
+        country,
+        state,
+        city,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,7 +208,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
 
                       /// Enable disable city dropdown [Optional Parameter]
-                      showCities: true,
+                      // showCities: true,
+                      flagState: CountryFlag.DISABLE,
 
                       /// Country dropdown label
                       countryDropdownLabel: "Select Country",
@@ -200,7 +225,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
                       /// Dropdown decoration
                       dropdownDecoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                         color: Colors.white,
                         border: Border.all(color: Colors.grey, width: 1),
                       ),
@@ -208,7 +234,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       /// When selected Country, State, and City
                       onCountryChanged: (value) {
                         setState(() {
-                          country = value;
+                          country = "India";
                         });
                       },
                       onStateChanged: (value) {
@@ -217,6 +243,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         });
                       },
                       onCityChanged: (value) {
+                        print(country);
                         setState(() {
                           city = value ?? "";
                         });
@@ -259,19 +286,25 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
                         onPressed: () {
+                          if (isButtonDisabled) return;
+
                           if (_formKey.currentState!.validate()) {
-                            final email = emailController.text;
-                            api.usersignup(
-                                nameController.text,
-                                emailController.text,
-                                phoneController.text,
-                                dobController.text,
-                                addressController.text,
-                                pincodeController.text,
-                                passwordController.text,
-                                country,
-                                state,
-                                city);
+                            showDialog(
+                              context: context,
+                              barrierDismissible:
+                                  false, // Prevent dismissing the dialog by tapping outside
+                              builder: (BuildContext context) {
+                                return const LottieLoader();
+                              },
+                            );
+                            handleSignUp(); // Perform the sign-up action
+
+                            // Future.delayed(const Duration(seconds: 3), () {
+                            //   // Close the loading dialog after 3 seconds
+                            //   // ignore: use_build_context_synchronously
+                            //   Navigator.of(context)
+                            //       .pop(); // This will close the dialog
+                            // });
                           }
                         },
                         child: const Text(
@@ -296,7 +329,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.off(() => LoginScreen());
+                            Get.off(() => const LoginScreen());
                           },
                           child: const Text(
                             ' Log In',
@@ -322,7 +355,7 @@ class _SignupScreenState extends State<SignupScreen> {
     DatePicker.showDatePicker(
       context,
       showTitleActions: true,
-      minTime: DateTime(2000, 1, 1),
+      minTime: DateTime(1920, 1, 1),
       maxTime: DateTime(2100, 12, 31),
       onConfirm: (date) {
         setState(() {

@@ -45,35 +45,48 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: imageurl == 'null'
-                                ? Image.asset(
-                                    "assets/images/man.png",
-                                    width: 100,
-                                    height: 100,
-                                  )
-                                : Image.network(
-                                    imageurl,
-                                    width: 100,
-                                    height: 100,
-                                  ),
+                            child: CircleAvatar(
+                              radius:
+                                  40, // Adjusted to maintain the 100x100 size
+                              backgroundColor: Colors.grey
+                                  .shade200, // CircleAvatar background color
+                              child: ClipOval(
+                                child: imageurl == 'null'
+                                    ? Image.asset(
+                                        "assets/images/man.png",
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit
+                                            .cover, // Ensures the image is cropped and fills the circle
+                                      )
+                                    : Image.network(
+                                        imageurl,
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit
+                                            .cover, // Ensures the image is cropped and fills the circle
+                                      ),
+                              ),
+                            ),
                           ),
                           Positioned(
                             bottom: 0,
                             right: 0,
                             child: GestureDetector(
-                              onTap: () {
-                                _pickAndUploadImage(
+                              onTap: () async {
+                                await _pickAndUploadImage(
                                     context, user['id'].toString());
+                                Get.find<HomeController>().reloadData();
                               },
                               child: Container(
                                 width: 30,
                                 height: 30,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors
                                       .orange, // Edit button background color
                                   shape: BoxShape.circle,
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.mode_edit_outlined,
                                   color: Colors.white,
                                   size: 20, // Icon size
@@ -83,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Column(
@@ -92,17 +105,17 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Text(
                             user['name'] ?? '',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontFamily: "Poppins",
                               fontSize: 22,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
                             user['customer_id'] ?? '',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontFamily: "Poppins",
                               fontWeight: FontWeight.w400,
@@ -116,19 +129,19 @@ class ProfileScreen extends StatelessWidget {
               ),
               const Divider(color: Colors.grey),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.phone,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['number'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'phone number',
                   style: TextStyle(
                     color: Colors.black,
@@ -138,19 +151,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.email,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['email_id'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'Email',
                   style: TextStyle(
                     color: Colors.black,
@@ -160,19 +173,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.calendar_month,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['dob'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'Date of Birth',
                   style: TextStyle(
                     color: Colors.black,
@@ -182,19 +195,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.location_on,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['address'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'Address',
                   style: TextStyle(
                     color: Colors.black,
@@ -204,19 +217,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.location_city,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['district'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'District',
                   style: TextStyle(
                     color: Colors.black,
@@ -226,19 +239,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.location_city_rounded,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['state'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'State',
                   style: TextStyle(
                     color: Colors.black,
@@ -248,19 +261,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.location_city_rounded,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['country'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'Country',
                   style: TextStyle(
                     color: Colors.black,
@@ -270,19 +283,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.pin_drop_rounded,
                   color: Colors.black,
                 ),
                 title: Text(
                   user['pincode'] ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'Pin Code',
                   style: TextStyle(
                     color: Colors.black,
@@ -300,7 +313,7 @@ class ProfileScreen extends StatelessWidget {
                       onPressed: () async {
                         _showEditPopup(context);
                       },
-                      child: Row(
+                      child: const Row(
                         children: [
                           Text(
                             'Edit Profile',
@@ -309,7 +322,7 @@ class ProfileScreen extends StatelessWidget {
                               color: Colors.black,
                             ),
                           ),
-                          const Spacer(),
+                          Spacer(),
                           Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.black,
@@ -319,8 +332,15 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () async {
+                        const LottieLoader();
                         await api.deleteSessionId();
-                        Get.to(() => LoginScreen());
+                        Get.deleteAll();
+                        final bottomNavBarController =
+                            Get.find<BottomNavBarController>();
+
+                        bottomNavBarController.resetTabIndex();
+
+                        Get.to(() => const LoginScreen());
                       },
                       child: Row(
                         children: [
@@ -395,16 +415,16 @@ class ProfileScreen extends StatelessWidget {
         final isUploaded = await api.uploadImage(uid, selectedImage);
         if (isUploaded) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Image uploaded successfully!')),
+            const SnackBar(content: Text('Image uploaded successfully!')),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to upload image.')),
+            const SnackBar(content: Text('Failed to upload image.')),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('No image selected.')),
+          const SnackBar(content: Text('No image selected.')),
         );
       }
     } catch (e) {

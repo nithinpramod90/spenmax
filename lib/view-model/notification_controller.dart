@@ -12,7 +12,7 @@ class NotificationController extends GetxController {
       final List<dynamic> data = await api.fetchNotifications();
       notifications.value = data;
     } catch (e) {
-      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
     }

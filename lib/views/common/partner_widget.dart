@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:spenmax/model/components/active_badge.dart';
 import 'package:spenmax/view-model/branches_controller.dart';
 import 'package:spenmax/view-model/home_controller.dart';
 import 'package:spenmax/view-model/partner_filtercontroller.dart';

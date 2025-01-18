@@ -86,7 +86,7 @@ class PartnerGrid extends StatelessWidget {
                 crossAxisCount: 1,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: 3 / 1.85),
+                childAspectRatio: 3 / 1.90),
             itemCount: controller.branches.length,
             itemBuilder: (context, index) {
               final branch = controller.branches[index];

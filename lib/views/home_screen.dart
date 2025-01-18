@@ -50,32 +50,32 @@ class HomeScreen extends StatelessWidget {
                       : 'Expired',
                 ),
                 const SizedBox(height: 28),
-                HomeContainer(
-                  imageurl: user['image'] ?? 'null',
-                  customerid: user['customer_id'] ?? '',
-                  name: user['name'] ?? '',
-                  expirydate: (user['package_c'] != null &&
-                          user['package_c'].isNotEmpty)
-                      ? user['package_c'][0]['expiry_date']
-                      : 'Expired',
-                  purchasedate: (user['package_c'] != null &&
-                          user['package_c'].isNotEmpty)
-                      ? user['package_c'][0]['purchase_date']
-                      : 'Expired',
-                  phone: user['number'] ?? '',
-                  state: user['state'] ?? '',
-                  district: user['district'] ?? '',
-                  address: user['address'] ?? '',
-                  country: user['country'] ?? '',
-                  dob: user['dob'] ?? '',
-                  email: user['email_id'] ?? '',
-                  pin: user['pincode'] ?? '',
-                  package: (user['package_c'] != null &&
-                          user['package_c'].isNotEmpty)
-                      ? user['package_c'][0]['package_name']
-                      : 'Expired',
-                  ishome: true,
-                ),
+                // HomeContainer(
+                //   imageurl: user['image'] ?? 'null',
+                //   customerid: user['customer_id'] ?? '',
+                //   name: user['name'] ?? '',
+                //   expirydate: (user['package_c'] != null &&
+                //           user['package_c'].isNotEmpty)
+                //       ? user['package_c'][0]['expiry_date']
+                //       : 'Expired',
+                //   purchasedate: (user['package_c'] != null &&
+                //           user['package_c'].isNotEmpty)
+                //       ? user['package_c'][0]['purchase_date']
+                //       : 'Expired',
+                //   phone: user['number'] ?? '',
+                //   state: user['state'] ?? '',
+                //   district: user['district'] ?? '',
+                //   address: user['address'] ?? '',
+                //   country: user['country'] ?? '',
+                //   dob: user['dob'] ?? '',
+                //   email: user['email_id'] ?? '',
+                //   pin: user['pincode'] ?? '',
+                //   package: (user['package_c'] != null &&
+                //           user['package_c'].isNotEmpty)
+                //       ? user['package_c'][0]['package_name']
+                //       : 'Expired',
+                //   ishome: true,
+                // ),
               ],
             ),
           ),

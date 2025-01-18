@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spenmax/model/api/api.dart';
-import 'package:spenmax/model/components/snackbar.dart';
 import 'package:spenmax/view-model/home_controller.dart';
 
 class EditUserPopup extends StatelessWidget {

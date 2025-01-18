@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailWidget extends StatelessWidget {
   const DetailWidget({
@@ -297,24 +298,32 @@ class DetailWidget extends StatelessWidget {
             const SizedBox(height: 16),
 
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Address',
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                    fontSize: 16,
+                const Padding(
+                  padding: EdgeInsets.only(
+                      right: 80.0), // Add spacing after "Address"
+                  child: Text(
+                    'Address',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-                const Spacer(),
-                Text(
-                  address,
-                  style: const TextStyle(
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                    fontSize: 16,
+                Expanded(
+                  // Ensure the address text wraps to the next line
+                  child: Text(
+                    address, textAlign: TextAlign.end,
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                    softWrap: true, // Allows text to wrap
                   ),
                 ),
               ],
@@ -324,7 +333,7 @@ class DetailWidget extends StatelessWidget {
             Row(
               children: [
                 const Text(
-                  'Locality',
+                  "Locality",
                   style: TextStyle(
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.normal,
@@ -345,55 +354,38 @@ class DetailWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'RegisteredAddress',
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                    fontSize: 16,
+                const Padding(
+                  padding: EdgeInsets.only(
+                      right: 80.0), // Add spacing after "Address"
+                  child: Text(
+                    'RegisteredAddress',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-                const Spacer(),
-                Text(
-                  registeredaddress,
-                  style: const TextStyle(
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                    fontSize: 16,
+                Expanded(
+                  // Ensure the address text wraps to the next line
+                  child: Text(
+                    registeredaddress,
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                    softWrap: true, // Allows text to wrap
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
 
-            Row(
-              children: [
-                const Text(
-                  "Key Person Name",
-                  style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  keyperson,
-                  style: const TextStyle(
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(height: 16),
 
             Row(
@@ -429,6 +421,8 @@ class DetailWidget extends StatelessWidget {
                     icon: Image.network(
                         'https://users.spenmax.in/instagram%20(1).png'), // Replace with actual path
                     onPressed: () {
+                      _launchURL(ig);
+
                       print('Instagram');
                     },
                   ),
@@ -438,6 +432,8 @@ class DetailWidget extends StatelessWidget {
                     icon: Image.network(
                         'https://users.spenmax.in/facebook.png'), // Replace with actual path
                     onPressed: () {
+                      _launchURL(fb);
+
                       print('Facebook');
                     },
                   ),
@@ -447,6 +443,7 @@ class DetailWidget extends StatelessWidget {
                     icon: Image.network(
                         'https://users.spenmax.in/youtube%20(1).png'), // Replace with actual path
                     onPressed: () {
+                      _launchURL(yt);
                       print('YouTube');
                     },
                   ),
@@ -457,6 +454,15 @@ class DetailWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Widget _socialMediaButton({

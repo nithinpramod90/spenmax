@@ -3,10 +3,10 @@ import 'dart:io';
 
 /// Function to pick an image from the gallery
 Future<File?> pickImage() async {
-  final ImagePicker _picker = ImagePicker();
+  final ImagePicker picker = ImagePicker();
 
   try {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       return File(pickedFile.path);

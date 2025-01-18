@@ -110,7 +110,7 @@ class ForgetPassword extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.off(() => LoginScreen());
+                          Get.off(() => const LoginScreen());
                         },
                         child: const Text(
                           ' Log In',

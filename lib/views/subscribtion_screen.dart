@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spenmax/model/components/url.dart';
+import 'package:spenmax/views/pricing_screen.dart';
 
 class SubscriptionScreen extends StatelessWidget {
   const SubscriptionScreen({super.key});
@@ -45,7 +46,7 @@ class SubscriptionScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  privacyPolicy();
+                  Get.to(PricingScreen(subscribed: false));
                 },
                 style: ElevatedButton.styleFrom(
                   padding:

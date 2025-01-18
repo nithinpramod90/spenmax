@@ -1,65 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OfferWidget extends StatelessWidget {
-  const OfferWidget({super.key});
+class OffersListWidget extends StatelessWidget {
+  final List<Map<String, dynamic>> offers;
+
+  const OffersListWidget({super.key, required this.offers});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width,
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(10), topRight: Radius.circular(5)),
-        border: Border.all(
-          color: Colors.grey, // Border color
-          width: 1, // Border width
-        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey, width: 1),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              "Exclusive discount for you",
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.w500,
-                color: Color(0xff668F9C),
-                fontSize: 22,
-              ),
+          const Text(
+            "Available Offers",
+            style: TextStyle(
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+              color: Color(0xff668F9C),
             ),
           ),
-          const SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                border: Border.all(
-                  color: Colors.grey, // Border color
-                  width: 1, // Border width
-                ),
-              ),
-              width: Get.width / 1.5,
-              child: const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Text(
-                  "Facility/Services Offered",
-                  textAlign: TextAlign.center,
+          const SizedBox(height: 16),
+          offers.isNotEmpty
+              ? ListView.builder(
+                  shrinkWrap:
+                      true, // Ensures it doesn't scroll inside the container
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: offers.length,
+                  itemBuilder: (context, index) {
+                    final offer = offers[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: Container(
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey, width: 1),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                "${offer['offer']} (${offer['discount_type'].toUpperCase()})",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                              width: Get.width / 1.8,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 62, 218, 68),
+                                borderRadius: BorderRadius.circular(8),
+                                border:
+                                    Border.all(color: Colors.green, width: 1),
+                              ),
+                              child: Center(
+                                child: ListTile(
+                                  leading: SizedBox(
+                                    width: 25,
+                                    child: Image.network(
+                                        "https://users.spenmax.in/fire.png"),
+                                  ),
+                                  title: const Text(
+                                    'Save With Spenmax',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color.fromARGB(
+                                          255, 255, 255, 255),
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                )
+              : const Text(
+                  "No offers available at the moment.",
                   style: TextStyle(
                     fontFamily: "Poppins",
-                    fontWeight: FontWeight.w400,
                     fontSize: 16,
+                    color: Colors.grey,
                   ),
                 ),
-              ),
-            ),
-          )
         ],
       ),
     );

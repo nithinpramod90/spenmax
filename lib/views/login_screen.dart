@@ -4,13 +4,23 @@ import 'package:spenmax/model/api/api.dart';
 import 'package:spenmax/views/forget_password.dart';
 import 'package:spenmax/views/signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   // Create controllers for email and password
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final Api api = Api();
+
+  bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,11 +82,25 @@ class LoginScreen extends StatelessWidget {
                       // Password TextField
                       TextField(
                         controller: passwordController, // Attach the controller
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: const Color(0xFF629A9F),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText =
+                                    !_obscureText; // Toggle password visibility
+                              });
+                            },
                           ),
                         ),
                       ),
@@ -142,7 +166,10 @@ class LoginScreen extends StatelessWidget {
                         children: [
                           const Text(
                             "Doesn't have an account yet?",
-                            style: TextStyle(color: Colors.black, fontSize: 18),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -151,9 +178,10 @@ class LoginScreen extends StatelessWidget {
                             child: const Text(
                               ' Sign Up',
                               style: TextStyle(
-                                  color: Color(0xFF539B9B),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
+                                color: Color(0xFF539B9B),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
                             ),
                           ),
                         ],

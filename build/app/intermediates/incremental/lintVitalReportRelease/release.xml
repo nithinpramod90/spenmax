@@ -28,7 +28,7 @@
   </manifestPlaceholders>
   <mainArtifact
       classOutputs="/home/hyper/flutter/spenmax/build/app/intermediates/javac/release/classes:/home/hyper/flutter/spenmax/build/app/tmp/kotlin-classes/release:/home/hyper/flutter/spenmax/build/app/kotlinToolingMetadata:/home/hyper/flutter/spenmax/build/app/intermediates/compile_and_runtime_not_namespaced_r_class_jar/release/R.jar"
-      applicationId="com.example.spenmax"
+      applicationId="com.appmine.spenmax"
       generatedSourceFolders="/home/hyper/flutter/spenmax/build/app/generated/ap_generated_sources/release/out"
       generatedResourceFolders="/home/hyper/flutter/spenmax/build/app/generated/res/resValues/release"
       desugaredMethodsFiles="/home/hyper/.gradle/caches/transforms-3/65c0c5e1a46dd2074f619deb01dcd57d/transformed/D8BackportedDesugaredMethods.txt">

@@ -20,6 +20,7 @@ class Api {
 
   Future<void> deleteSessionId() async {
     await box.remove('token');
+    await box.remove('name');
     print('bnbbn ID deleted');
   }
 
@@ -59,6 +60,9 @@ class Api {
 
           Get.off(() => const HomeScreen());
         } else {
+          print(email);
+          print(password);
+          print(responseData);
           showCustomSnackbar(
             message: "User Credential incorrect!",
 
@@ -102,12 +106,20 @@ class Api {
           'Content-Type': 'application/json',
         },
       );
-      // print('Response: ${response.body}');
+
       final responseData = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
         print('Response: ${response.body}');
-        return jsonDecode(response.body);
+
+        // Check if 'package_c' is empty
+        if (responseData['package_c'] == null ||
+            responseData['package_c'].isEmpty) {
+          Get.off(() => const SubscriptionScreen());
+          return {}; // Return an empty map as the user is redirected
+        }
+
+        return responseData;
       } else {
         if (response.statusCode == 403) {
           Get.off(() => const SubscriptionScreen());
@@ -254,7 +266,6 @@ class Api {
 
   Future<List<Map<String, dynamic>>> fetchpartnercat() async {
     final String? token = await getSessionId();
-
     try {
       print("api accesed");
       final response = await http.get(
@@ -287,6 +298,7 @@ class Api {
       } else if (search != null) {
         url += '?search=$search';
       }
+      print(url);
       final response = await http.get(
         Uri.parse(url),
         headers: {
@@ -453,9 +465,13 @@ class Api {
 
       if (response.statusCode == 200) {
         print('Image uploaded successfully!');
+
         return true;
       } else {
-        print('Failed to upload image. Status code: ${response}');
+        print('Failed to upload image. Status code: $response');
+        final errorResponse = await http.Response.fromStream(response);
+        print(errorResponse.body);
+
         return false;
       }
     } catch (e) {

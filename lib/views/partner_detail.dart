@@ -37,6 +37,7 @@ class PartnerDetail extends StatelessWidget {
 
             // Section for data
             Obx(() {
+              // ignore: invalid_use_of_protected_member
               final company = _controller.companyDetails.value;
               if (company.isEmpty) {
                 return const Center(child: Text("No data found"));
@@ -104,7 +105,8 @@ class PartnerDetail extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const OfferWidget()
+                          OffersListWidget(
+                              offers: parseOffers(company["offers"]))
                         ],
                       ),
                     ),
@@ -116,5 +118,12 @@ class PartnerDetail extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<Map<String, dynamic>> parseOffers(dynamic offers) {
+    if (offers is List) {
+      return offers.whereType<Map<String, dynamic>>().toList();
+    }
+    return [];
   }
 }

@@ -14,6 +14,6 @@ void checkSessionAndNavigate() async {
     Get.back();
   } else {
     // Session ID doesn't exist, navigate to PhoneAuth
-    Get.off(() => LoginScreen());
+    Get.off(() => const LoginScreen());
   }
 }

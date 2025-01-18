@@ -1,14 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spenmax/model/components/appbar.dart';
 import 'package:spenmax/model/components/bottom_nav_bar.dart';
+import 'package:spenmax/model/components/snackbar.dart';
 import 'package:spenmax/model/components/welcome_text.dart';
 import 'package:spenmax/view-model/package_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PricingScreen extends StatelessWidget {
-  PricingScreen({super.key});
+  PricingScreen({super.key, required this.subscribed});
   final PackageController controller = Get.put(PackageController());
-
+  final bool subscribed;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,11 +65,15 @@ class PricingScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            _buildPackageTypeButton(
-                                'BASIC', 'BASIC', controller),
-                            _buildPackageTypeButton(
-                                'COMBO', 'COMBO', controller),
-                            _buildPackageTypeButton('GRAND', 'ALL', controller),
+                            Flexible(
+                                child: _buildPackageTypeButton(
+                                    'BASIC', 'BASIC', controller)),
+                            Flexible(
+                                child: _buildPackageTypeButton(
+                                    'COMBO', 'COMBO', controller)),
+                            Flexible(
+                                child: _buildPackageTypeButton(
+                                    'GRAND', 'ALL', controller)),
                           ],
                         ),
                       ),
@@ -109,7 +117,7 @@ class PricingScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: subscribed ? BottomNavBar() : null,
     );
   }
 
@@ -162,6 +170,8 @@ class PricingScreen extends StatelessWidget {
             children: [
               Text(
                 packageDetail['name'],
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Color.fromARGB(255, 35, 150, 156),
                   fontFamily: "Poppins",
@@ -172,6 +182,7 @@ class PricingScreen extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 packageDetail['discription'],
+                overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: const TextStyle(
                   color: Colors.black,
@@ -271,7 +282,9 @@ class PricingScreen extends StatelessWidget {
                         8), // Adjust radius for curve intensity
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  whatsapp('919037975042');
+                },
                 child: const Text(
                   'Subscribe Now',
                   style: TextStyle(
@@ -287,5 +300,23 @@ class PricingScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  whatsapp(phone) async {
+    var contact = phone;
+    var androidUrl =
+        "whatsapp://send?phone=$contact&text=Hi, I need to take a Subscription";
+    var iosUrl =
+        "https://wa.me/$contact?text=${Uri.parse('Hi, I need to take a Subscription')}";
+
+    try {
+      if (Platform.isIOS) {
+        await launchUrl(Uri.parse(iosUrl));
+      } else {
+        await launchUrl(Uri.parse(androidUrl));
+      }
+    } on Exception {
+      showCustomSnackbar(message: "bugged");
+    }
   }
 }
